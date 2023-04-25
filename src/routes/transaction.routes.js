@@ -6,7 +6,9 @@ import { listTransaction, transaction } from "../controllers/transaction.control
 import { Router } from "express"
 
 
-const transactionRouter = Router()
-transactionRouter.use(authValidation)
-transactionRouter.post("/transactions", validateSchema(transactionSchema), transaction)
-transactionRouter.post("/transactions", validateSchema(transactionSchema), listTransaction)
+const transactionRouter = Router();
+
+transactionRouter.use(authValidation);
+
+transactionRouter.post("/transactions", validateSchema(transactionSchema), transaction);
+transactionRouter.get("/transactions", listTransaction);
