@@ -18,11 +18,11 @@ export async function transaction(req, res) {
     }
 }
 export async function listTransaction(req, res){
-    const {user} = res.locals
     try{
-        const transactionList = await db.collection("transactions").find({userId: user._id}).toArray()
-        return res.status(200).send(transactionList)
-    } catch (err){
-        res.status(500).send(err.message)
+        const session = res.locals.session;
+        const transactions = await db.collection('transactions').find({userId: session.userId}).toArray();  
+        res.send(transactions);
+    } catch(error){
+        res.status(500).send(error.message);
     }
 }
