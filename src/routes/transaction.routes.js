@@ -6,6 +6,5 @@ import { listTransaction, transaction } from "../controllers/transaction.control
 
 
 const transactionRouter = Router()
-transactionRouter.use(authValidation)
-transactionRouter.post("/transactions", validateSchema(transactionSchema), transaction)
-transactionRouter.get("/transactions", listTransaction)
+transactionRouter.post("/transactions", authValidation, validateSchema(transactionSchema), transaction)
+transactionRouter.get("/transactions", authValidation, listTransaction)
